@@ -1,0 +1,82 @@
+<section class="dashboard-wrap mtb-40">
+    <div class="container">
+          <div class="body-content">
+          <div class="row">
+            <div class="col-md-3">
+                      <div class="dash-left">
+                          <ul>
+                              <li class="active"><a routerLink="/dashboard" [routerLinkActive]="['active']">Dashboard</a></li>
+                              <li class="active"><a routerLink="/product" [routerLinkActive]="['active']">product</a></li>
+                              <li class="active"><a routerLink="/product" [routerLinkActive]="['active']">Product</a></li>
+                              <li><a href="#">Pages</a></li>
+                              <li><a href="#">Logout</a></li>
+                          </ul>
+                      </div>   
+                  </div>
+                  <div class="col-md-9">
+                      <div class="dash-right">
+                          <h1>Product</h1>
+                          <!-- title,product,description,image, price -->
+                          <form  [formGroup]="prodForm" (ngSubmit)="onSubmit(prodForm)" enctype="multipart/form-data">
+                            <div class="form-group form-row">
+                                <label class="col-md-3">Title : <span class="required">*</span></label>
+                                <div class="col-md-9">
+                                  <input type="text" formControlName="title" class="form-control" placeholder="Title" required>
+                                  <span *ngIf="!prodForm.get('title').valid && prodForm.get('title').touched">Please enter product Title !!!</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-row">
+                                <label class="col-md-3">Category : <span class="required">*</span></label>
+                                <div class="col-md-9">
+                                    <select formControlName="category" class="form-control" >
+                                        <option [value]="category.id" *ngFor="let category of categories">{{ category.name }}</option>
+                                    </select>
+                                  <span *ngIf="!prodForm.get('category').valid && prodForm.get('category').touched">Please enter product Title !!!</span>
+                                </div>  
+                            </div>
+
+                            <div class="form-group form-row">
+                                <label class="col-md-3">price : <span class="required">*</span></label>
+                                <div class="col-md-9">
+                                  <input type="text" formControlName="price" class="form-control" placeholder="price" required>
+                                  <span *ngIf="!prodForm.get('price').valid && prodForm.get('price').touched">Please enter product price !!!</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-row">
+                                <label class="col-md-3">description : <span class="required">*</span></label>
+                                <div class="col-md-9">
+                                  <input type="text" formControlName="description" class="form-control" placeholder="description" required>
+                                  <span *ngIf="!prodForm.get('description').valid && prodForm.get('description').touched">Please enter product description !!!</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-row">
+                              <label class="col-md-3">description : <span class="required">*</span></label>
+                              <div class="col-md-9">
+                                <input type="file"  (change)="fileUpload($event)">
+                                <span *ngIf="!prodForm.get('description').valid && prodForm.get('description').touched">Please enter product description !!!</span>
+                              </div>
+                          </div>
+
+                        
+                            <div class="form-group">
+                                <button type="submit" [disabled]="!prodForm.valid" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                      </div>   
+
+                      <div class="dash-right">
+                        <h4>Product List</h4>
+                        <table>
+                          <tr *ngFor="let product of list; let i = index">
+                            <td >{{ i+1 }}.{{ product.title }}</td>
+                          </tr>
+                        </table>
+                    </div>
+                  </div>
+          </div>
+          </div>
+    </div>
+  </section>
